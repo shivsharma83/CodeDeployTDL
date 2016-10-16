@@ -1,0 +1,22 @@
+version: 0.0
+os: linux
+files:
+   - source: /
+     destination: /opt/apps/taas-hotels-dataloader
+permissions:
+   - object: /opt/apps/taas-hotels-dataloader
+     pattern: "**"
+     owner: taas
+     group: root
+     mode: 755
+     type:
+       - file
+hooks:
+   BeforeInstall:
+    - location: scripts/killjava.sh
+      runas: root
+    - location: scripts/overridewar.sh
+      runas: root
+   AfterInstall:
+    - location: scripts/start.sh
+      runas: root
